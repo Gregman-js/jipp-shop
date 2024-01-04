@@ -11,7 +11,7 @@ const Summary = () => {
             <p>Lączna wartość zamówienia: {params.price} zł</p>
             <Button>Przejdź do płatności</Button>
         </>
-);
+    );
 };
 
 export default Summary;

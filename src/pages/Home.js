@@ -1,19 +1,16 @@
-import {useState, useEffect} from "react";
-import {Row} from "react-bootstrap";
+import {useContext, useState} from "react";
+import {Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom"
 import ProductItem from "../components/ProductItem";
+import {ProductContext} from "../context/ProductContext";
 
 const Home = () => {
-    const [pens, setPens] = useState([]);
     const [basket, setBasket] = useState([]);
-    useEffect(() => {
-        fetch("http://localhost:3000/products")
-            .then(res => res.json())
-            .then(res => setPens(res))
-            .catch(error => console.log(error))
-    }, [])
+
+    const products = useContext(ProductContext);
+
     return (
-        <>
+        <Container>
             <Row>
                 <ul>
                     {
@@ -31,11 +28,10 @@ const Home = () => {
             </Row>
             <Row>
                 {
-                    pens.map((el) => <ProductItem data={el} addToBasket={setBasket} key={el.slug} />)
+                    products.map((el) => <ProductItem data={el} addToBasket={setBasket} key={el.slug}/>)
                 }
             </Row>
-        </>
-
+        </Container>
     );
 };
 

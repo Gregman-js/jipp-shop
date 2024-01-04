@@ -14,6 +14,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Json server
+### `json-server --watch src/data/products.json --port 3001`
+
 ## Available Scripts
 
 In the project directory, you can run:
