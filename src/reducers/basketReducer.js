@@ -7,12 +7,24 @@ export const basketSlice = createSlice({
         addToBasket: (state, action) => {
             return [...state, action.payload];
         },
-        removeFromBasket: (state, action) => {
-            return state.filter((item) => item !== action.payload);
+        removeOneFromBasket: (state, action) => {
+            const indexToRemove = state.findIndex(item => item.slug === action.payload.slug);
+
+            if (indexToRemove !== -1) {
+                return [...state.slice(0, indexToRemove), ...state.slice(indexToRemove + 1)];
+            }
+
+            return state;
         },
-        clearBasket: () => [],
+        removeItemFromBasket: (state, action) => {
+            return state.filter((item) => item.slug !== action.payload.slug);
+        },
     },
 });
 
-export const {addToBasket, removeFromBasket, clearBasket} = basketSlice.actions;
+export const {
+    addToBasket,
+    removeOneFromBasket,
+    removeItemFromBasket,
+} = basketSlice.actions;
 export default basketSlice.reducer;
