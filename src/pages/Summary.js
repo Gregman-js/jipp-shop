@@ -12,7 +12,11 @@ const SummaryPage = () => {
     const basket = useSelector((state) => state.basket);
 
     const groupedItems = basket.reduce((acc, item) => {
-        const existingItem = acc.find((group) => group.product.slug === item.slug);
+        const existingItem = acc.find((group) => {
+            return group.product.slug === item.slug
+                && group.product.price === item.price
+                && group.product.variation === item.variation;
+        });
 
         if (existingItem) {
             existingItem.count += 1;
@@ -71,7 +75,7 @@ const SummaryPage = () => {
                                         <div className="ms-3 d-inline-block align-middle">
                                             <h5 className="mb-0">
                                                 <Link to={`/product/${group.product.slug}`}
-                                                    className="text-dark d-inline-block align-middle text-decoration-none"
+                                                      className="text-dark d-inline-block align-middle text-decoration-none"
                                                 >
                                                     {group.product.title}
                                                 </Link>
@@ -80,6 +84,12 @@ const SummaryPage = () => {
                                                 className="text-muted font-weight-normal font-italic d-block"
                                             >
                                                 Kategoria: {group.product.product_cat[0]}
+                                            </span>
+                                            }
+                                            {group.product.variation && <span
+                                                className="text-muted font-weight-normal font-italic d-block"
+                                            >
+                                                Wariacja: {group.product.variation}
                                             </span>
                                             }
                                         </div>
@@ -107,7 +117,8 @@ const SummaryPage = () => {
                                     </div>
                                 </td>
                                 <td className="border-0 align-middle">
-                                    <Button variant={"link"} className={"text-black"} onClick={() => dispatch(removeItemFromBasket(group.product))}>
+                                    <Button variant={"link"} className={"text-black"}
+                                            onClick={() => dispatch(removeItemFromBasket(group.product))}>
                                         <Icon.Trash size={16}/>
                                     </Button>
                                 </td>
@@ -130,12 +141,12 @@ const SummaryPage = () => {
                                 className="text-muted">Cena wysyłki </strong><strong>{shippingCost} PLN</strong>
                             </li>
                             <li className="d-flex justify-content-between py-3 border-bottom"><strong
-                                className="text-muted">Total</strong>
+                                className="text-muted">Kwota całkowita</strong>
                                 <h5 className="font-weight-bold">{totalSum} PLN</h5>
                             </li>
                         </ul>
                         <a href={"https://www.youtube.com/watch?v=ZZ5LpwO-An4"}
-                           className="btn btn-dark btn-block rounded-pill py-2">Proceed to checkout</a>
+                           className="btn btn-dark btn-block rounded-pill py-2">Przejdź do płatności</a>
                     </div>
                 </Col>
             </Row>

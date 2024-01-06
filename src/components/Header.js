@@ -1,15 +1,11 @@
 import * as Icon from 'react-bootstrap-icons';
-import {NavLink, useLocation} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {Badge} from "react-bootstrap";
 
 const Header = () => {
     const basket = useSelector((state) => state.basket);
     const itemsCount = basket.length;
-    const location = useLocation();
-
-    const isProductsTabActive = location.pathname === "/";
-    const isSummaryTabActive = location.pathname === "/summary";
 
     return (
         <header className={"mb-4"}>

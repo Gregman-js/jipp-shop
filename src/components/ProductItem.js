@@ -8,11 +8,6 @@ import {addToBasket} from "../reducers/basketReducer";
 const ProductItem = ({data}) => {
     const dispatch = useDispatch();
 
-    const clickHandler = (e) => {
-        e.preventDefault();
-        dispatch(addToBasket(data));
-    };
-
     return (
 
         <Col className={"mb-4 col-6 col-md-3"}>
@@ -35,7 +30,7 @@ const ProductItem = ({data}) => {
                             Cena: {data.price} zł
                         </Link>
                     </Card.Text>
-                    <Button variant="primary" onClick={clickHandler}>Dodaj do koszyka</Button>
+                    <Button variant="primary" onClick={() => dispatch(addToBasket(data))}>Dodaj do koszyka</Button>
                 </Card.Body>
             </Card>
         </Col>
