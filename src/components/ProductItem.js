@@ -2,15 +2,17 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import {Col} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {addToBasket} from "../reducers/basketReducer";
 
-const ProductItem = ({data, addToBasket}) => {
-    console.log(data);
+const ProductItem = ({data}) => {
+    const dispatch = useDispatch();
+
     const clickHandler = (e) => {
         e.preventDefault();
-        if (typeof addToBasket === "function") {
-            addToBasket(prev => [...prev, data]);
-        }
-    }
+        dispatch(addToBasket(data));
+    };
+
     return (
 
         <Col className={"mb-4 col-6 col-md-3"}>

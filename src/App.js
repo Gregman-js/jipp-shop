@@ -7,22 +7,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {ProductProvider} from "./context/ProductContext";
 import Header from "./components/Header";
+import {Provider} from "react-redux";
+import store from "./store";
 
 function App() {
     return (
-        <ProductProvider>
-            <Router>
-                <main>
-                    <Header/>
-                    <Routes>
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="/product/:productSlug" element={<Product/>}/>
-                        <Route path="/summary/:price" element={<Summary/>}/>
-                        <Route path="*" element={<ErrorPage/>}/>
-                    </Routes>
-                </main>
-            </Router>
-        </ProductProvider>
+        <Provider store={store}>
+            <ProductProvider>
+                <Router>
+                    <main>
+                        <Header/>
+                        <Routes>
+                            <Route path="/" element={<Home/>}/>
+                            <Route path="/product/:productSlug" element={<Product/>}/>
+                            <Route path="/summary" element={<Summary/>}/>
+                            <Route path="*" element={<ErrorPage/>}/>
+                        </Routes>
+                    </main>
+                </Router>
+            </ProductProvider>
+        </Provider>
     );
 }
 
